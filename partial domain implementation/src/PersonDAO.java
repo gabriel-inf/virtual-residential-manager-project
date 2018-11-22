@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+import org.apache.catalina.User;
+import org.springframework.boot.jdbc.DatabaseDriver;
+
 import systemexceptions.RegisterNotFoundException;
 
 public class PersonDAO {
@@ -42,5 +45,13 @@ public class PersonDAO {
 		//	Here we have to decide if the parameter will be an User object or the user name, id.
 		Visitor savingVisitor = new Visitor(Database.getInstance().getAllUsers().size(), name, group, userToVinculate);
 		Database.getInstance().save(savingVisitor);
+	}
+	
+	public boolean authenticateUser(String login, String password) {
+		for(User user : Database.getInstance.getAllUsers()) {
+			if (user.getLogin() == login && user.getPassword() == password)
+				return true;
+		}
+		return false;
 	}
 }
