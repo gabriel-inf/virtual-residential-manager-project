@@ -61,4 +61,11 @@ public class Person {
 		}
 		return false;
 	}
+	
+	public boolean equals(Person p) {
+		if(p.getId()==this.id && p.getName() == this.name && p.getGroup() == this.group)
+			return true;
+		else
+			return false;
+	}
 }

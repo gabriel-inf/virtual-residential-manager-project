@@ -1,21 +1,20 @@
-import java.util.ArrayList;
-
-import systemexceptions.IdentificationParametersException;
 
 public class Camera {
 	
-	public boolean identify(Person person, ArrayList<Person> systemPeople) throws IdentificationParametersException {
-		if(person!=null && !systemPeople.isEmpty()) {
-			for (Person systemPerson : systemPeople) {
-				if(systemPerson==person)
-					return true;
-			}
-			return false;
-		}
-		else
-			throw new IdentificationParametersException();
-	}
+	private int id;
+	private RecognitionModule recognitionModule;
 	
+	public Camera(int id) {
+		this.id=id;
+		this.recognitionModule = new RecognitionModule();
+	}
+	public int getId() {
+		return id;
+	}
+	public RecognitionModule getRecognitionModule() {
+		return recognitionModule;
+	}
+
 	public int getNumPeopleWaiting() {
 		//	Maybe we can try to implement a method that returns a random int.
 		return 0;

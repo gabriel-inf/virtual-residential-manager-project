@@ -2,10 +2,12 @@
 public class Gate extends CondominumDependency{
 	private boolean isOpen;
 	private boolean closePerson;
+	private Camera gateCamera;
 	
-	public Gate() {
+	public Gate(Camera gateCamera) {
 		this.isOpen=false;
 		this.closePerson=false;
+		this.gateCamera = gateCamera;
 	}
 	
 	public boolean isOpen() {
@@ -13,6 +15,9 @@ public class Gate extends CondominumDependency{
 	}
 	public boolean isClosePerson() {
 		return closePerson;
+	}
+	public Camera getGateCamera() {
+		return gateCamera;
 	}
 	
 	public void open() {

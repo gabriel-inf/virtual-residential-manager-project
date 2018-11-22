@@ -1,19 +1,22 @@
 import java.util.ArrayList;
 
+
 public class User extends Person{
 	private String login;
 	private String password;
 	private int floor;
 	private int building;
+	private int apartmentNumber;
 	private ArrayList<Notification> notifications;
 	
-	public User(int id, String name, String login, String password, int floor, int building, Enum<Groups> group) throws Exception {
+	public User(int id, String name, String login, String password, int apartmentNumber, int floor, int building, Enum<Groups> group) throws Exception {
 			super(id, name, null, group, creatingUser);		//	Using null for the photo attribute.
 			this.login = login;
 			this.password = password;
 			this.floor = floor;
 			this.building = building;
 			this.notifications = new ArrayList<Notification>();
+			this.apartmentNumber = apartmentNumber;
 	}
 	
 	public String getLogin() {
@@ -31,6 +34,9 @@ public class User extends Person{
 	public ArrayList<Notification> getNotifications() {
 		return notifications;
 	}
+	public int getApartmentNumber() {
+		return this.apartmentNumber;
+	}
 	public void addNotification(String description, Object photo) {
 		this.notifications.add(new Notification(description, photo));
 	}
@@ -42,6 +48,7 @@ public class User extends Person{
 	}
 	
 //	public static void main(String[] args) {
+//		PersonDAO pDAO = new PersonDAO();
 //		try{
 //			ArrayList<User> users = Database.getInstance().getAllUsers();
 //			ArrayList<Visitor> visitors = Database.getInstance().getAllVisitors();
@@ -54,6 +61,13 @@ public class User extends Person{
 //				System.out.println(visitor);
 //				System.out.println("\n");
 //			}
+//			pDAO.saveUser("tester", "tester", "tester", 1, 1, 1, Groups.User);
+//			
+//			ArrayList<User> users2 = Database.getInstance().getAllUsers();
+//			for (User user : users2) {
+//				System.out.println(user);
+//				System.out.println("\n");
+//			}
 //		}
 //		catch(InvalidPersonGroupException ipg) {
 //			System.out.println(ipg);
@@ -61,6 +75,5 @@ public class User extends Person{
 //		catch(Exception e) {
 //			System.out.println(e);
 //		}
-//	}
-	
+//	}	
 }
