@@ -9,7 +9,7 @@ public class Person {
 	private Integer id;
 	private String name;
 	private Object photo;
-	private Enum<Groups> group;
+	private Groups group;
 	private ArrayList<Integer> permissions;	//	Permissions were an individual class in the simplified
 											//	class diagram, but it's better to make it an attribute.
 	
@@ -19,7 +19,7 @@ public class Person {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Person(Integer id, String name, Object photo, Enum<Groups> group, boolean creatingUser) throws Exception {
+	public Person(Integer id, String name, Object photo, Groups group, boolean creatingUser) throws Exception {
 		final boolean groupIsConsistent = (creatingUser && (group==Groups.User || group==Groups.Administrator)) || (!creatingUser && (group==Groups.Visitor || group==Groups.Maintenance));
 		if(groupIsConsistent) {
 			this.id=id;
@@ -37,7 +37,7 @@ public class Person {
 	public String getName() {
 		return this.name;
 	}
-	public Enum<Groups> getGroup() {
+	public Groups getGroup() {
 		return this.group;
 	}
 	public Object getPhoto() {
@@ -49,7 +49,7 @@ public class Person {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public void setGroup(Enum<Groups> group) {
+	public void setGroup(Groups group) {
 		this.group = group;
 	}
 	public void setPhoto(Object photo) {
