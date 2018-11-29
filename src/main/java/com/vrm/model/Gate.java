@@ -11,7 +11,6 @@ public class Gate extends CondominumDependency{
 		this.closePerson=false;
 		this.gateCamera = gateCamera;
 	}
-	
 	public boolean isOpen() {
 		return isOpen;
 	}

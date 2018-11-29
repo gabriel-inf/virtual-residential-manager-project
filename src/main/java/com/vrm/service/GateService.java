@@ -9,12 +9,11 @@ import com.vrm.model.Person;
 import com.vrm.model.User;
 
 public class GateService {
-	//Modify all the methods that are receiving gate as parameter to receive gateId, and then get the gate object
-	//from Database
 	
-	public void openGateService(ArrayList<Person> authorizedPeople, ArrayList<Person> peopleThatEntered, Gate gate) throws Exception {
+	public void openGateService(ArrayList<Person> authorizedPeople, ArrayList<Person> peopleThatEntered) throws Exception {
 		CameraService cameraService = new CameraService();
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
+		Gate gate = condominiumDAO.getCondominiumGate();
 		
 		gate.open();
 		boolean isThereIntruders = cameraService.isThereIntruders(authorizedPeople, peopleThatEntered, gate.getGateCamera());
@@ -25,8 +24,10 @@ public class GateService {
 		gate.close();
 	}
 	
-	public void sendNotification(int apartmentNumber, Gate gate) throws Exception {
+	public void sendNotification(int apartmentNumber) throws Exception {
 		PersonDAO personDAO = new PersonDAO();
+		CondominiumDAO condominiumDAO = new CondominiumDAO();
+		Gate gate = condominiumDAO.getCondominiumGate();
 		User userToNotify;
 		
 		userToNotify = personDAO.getUserByApartmentNumber(apartmentNumber);
@@ -35,7 +36,7 @@ public class GateService {
 		}
 	}
 	
-	public void answerNotification(boolean status, Person personEntering, ArrayList<Person> peopleThatEntered, int apartmentNumber, Gate gate) throws Exception {
+	public void answerNotification(boolean status, Person personEntering, ArrayList<Person> peopleThatEntered, int apartmentNumber) throws Exception {
 		PersonDAO personDAO = new PersonDAO();
 		User userNotificated;
 		
@@ -45,7 +46,7 @@ public class GateService {
 		if(status) {
 			ArrayList<Person> authorizedPeople = new ArrayList<>();
 			authorizedPeople.add(personEntering);
-			this.openGateService(authorizedPeople, peopleThatEntered, gate);
+			this.openGateService(authorizedPeople, peopleThatEntered);
 		}
 	}
 	

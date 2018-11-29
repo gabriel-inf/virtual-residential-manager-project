@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.vrm.model.AlarmSystem;
 import com.vrm.model.Elevator;
+import com.vrm.model.Gate;
 import com.vrm.model.Person;
 
 public class CondominiumDAO {
@@ -20,5 +21,7 @@ public class CondominiumDAO {
 	public ArrayList<Elevator> getCondominiumElevators() throws Exception{
 		return Database.getInstance().getCondominiumElevators();
 	}
-	
+	public Gate getCondominiumGate() throws Exception {
+		return Database.getInstance().getCondominiumGate();
+	}
 }

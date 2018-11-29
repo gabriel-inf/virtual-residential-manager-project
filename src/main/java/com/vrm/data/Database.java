@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.vrm.model.AlarmSystem;
 import com.vrm.model.Camera;
 import com.vrm.model.Elevator;
+import com.vrm.model.Gate;
 import com.vrm.model.Groups;
 import com.vrm.model.Person;
 import com.vrm.model.User;
@@ -18,6 +19,7 @@ public class Database {	//	Class implemented using the Singleton design pattern.
 	private static ArrayList<Camera> systemCameras;
 	private static ArrayList<Elevator> systemElevators;
 	private static AlarmSystem alarmSystem;
+	private static Gate condominiumGate;
 	
 	private Database() throws Exception {	//	The Person constructor throws an exception if the group
 											//	used to create the object is not valid. The Visitor constructor also
@@ -49,6 +51,8 @@ public class Database {	//	Class implemented using the Singleton design pattern.
 		systemElevators.add(new Elevator(1,systemCameras.get(0)));
 		systemElevators.add(new Elevator(1,systemCameras.get(1)));
 		
+		condominiumGate = new Gate(systemCameras.get(2));
+		
 	}
 	
 	public static Database getInstance() throws Exception {
@@ -56,7 +60,9 @@ public class Database {	//	Class implemented using the Singleton design pattern.
 			instance = new Database();
 		return instance;
 	}
-	
+	public Gate getCondominiumGate() {
+		return condominiumGate;
+	}
 	public ArrayList<User> getAllUsers(){
 		return systemUsers;
 	}
