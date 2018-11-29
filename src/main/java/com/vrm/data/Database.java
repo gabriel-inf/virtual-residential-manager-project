@@ -32,7 +32,7 @@ public class Database { // Class implemented using the Singleton design pattern.
 		systemElevators = new ArrayList<Elevator>();
 		alarmSystem = new AlarmSystem();
 		registeredEntrances = new ArrayList<Person>();
-		systemFlowString = new String("Started case:#");
+		systemFlowString = "Started case:#";
 
 		systemUsers.add(new User(0, "Maria", "Maria", "123", 20, 2, 2, Groups.Administrator));
 		systemUsers.add(new User(1, "Joao", "Joao", "123", 10, 1, 1, Groups.User));
@@ -104,10 +104,14 @@ public class Database { // Class implemented using the Singleton design pattern.
 		registeredEntrances.add(person);
 	}
 
+	public String getLogs(){
+		return systemFlowString;
+	}
+
 	public void log(String action){
 		systemFlowString="#"+action+systemFlowString;
 	} 
 	public void cleanLog(){
-		systemFlowString= "Started case:#";
+		systemFlowString = "Started case:#";
 	}
 }

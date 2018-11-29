@@ -43,12 +43,12 @@ public class PersonDAO {
 		throw new RegisterNotFoundException();
 	}
 	
-	public void saveUser(String name, String login, String password, int apartmentNumber, int floor, int building, Enum<Groups> group) throws Exception {
+	public void saveUser(String name, String login, String password, int apartmentNumber, int floor, int building, Groups group) throws Exception {
 			User savingUser = new User(Database.getInstance().getAllUsers().size(), name, login, password, apartmentNumber, floor, building, group);
 			Database.getInstance().save(savingUser);
 	}
 	
-	public void saveVisitor(String name, Enum<Groups> group, User userToVinculate) throws Exception {
+	public void saveVisitor(String name, Groups group, User userToVinculate) throws Exception {
 		//	Here we have to decide if the parameter will be an User object or the user name, id.
 		Visitor savingVisitor = new Visitor(Database.getInstance().getAllUsers().size(), name, group, userToVinculate);
 		Database.getInstance().save(savingVisitor);

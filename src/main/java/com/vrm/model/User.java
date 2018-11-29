@@ -11,7 +11,7 @@ public class User extends Person{
 	private int apartmentNumber;
 	private ArrayList<Notification> notifications;
 	
-	public User(int id, String name, String login, String password, int apartmentNumber, int floor, int building, Enum<Groups> group) throws Exception {
+	public User(int id, String name, String login, String password, int apartmentNumber, int floor, int building, Groups group) throws Exception {
 			super(id, name, null, group, creatingUser);		//	Using null for the photo attribute.
 			this.login = login;
 			this.password = password;

@@ -1,6 +1,5 @@
 package com.vrm.controller;
 
-
 import com.vrm.data.Database;
 import com.vrm.model.Person;
 import com.vrm.service.CameraService;
@@ -15,29 +14,31 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("/camera")
-public class CameraController{
+public class CameraController {
 
     private CameraService camService = new CameraService();
-    
 
     /**
-     * This method receives an array of people and retruns an array of identified people
+     * This method receives an array of people and retruns an array of identified
+     * people
+     * 
      * @param entring arraylist of people
-     * @param camId the camera that is processing the entry
+     * @param camId   the camera that is processing the entry
      * @throws Exception
      */
 
     @PutMapping
-    public boolean identifyCameraAction(@RequestBody Person p, @RequestParam Integer camId) throws Exception {
+    public String identifyCameraAction(@RequestBody Person p, @RequestParam Integer camId) throws Exception {
         Database.getInstance().cleanLog();
-        Database.getInstance().log("Camera " + camId + "identifies a person");
+        Database.getInstance().log("-> Camera " + camId + " identifies a person " + p.getName());
+
         try {
             this.camService.identifyPerson(p, camId);
-            return true; 
+            return Database.getInstance().getLogs();
         } catch (Exception e) {
-            return false;
+            return Database.getInstance().getLogs();
         }
-        
+
     }
 
 }
