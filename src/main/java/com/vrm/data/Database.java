@@ -8,6 +8,7 @@ import com.vrm.model.Elevator;
 import com.vrm.model.Gate;
 import com.vrm.model.Groups;
 import com.vrm.model.Person;
+import com.vrm.model.SchedulePattern;
 import com.vrm.model.User;
 import com.vrm.model.Visitor;
 
@@ -18,18 +19,22 @@ public class Database {	//	Class implemented using the Singleton design pattern.
 	private static ArrayList<Person> registeredEntrances;
 	private static ArrayList<Camera> systemCameras;
 	private static ArrayList<Elevator> systemElevators;
+	private static ArrayList<SchedulePattern> condominiumSchedulePatterns;
 	private static AlarmSystem alarmSystem;
 	private static Gate condominiumGate;
 	
 	private Database() throws Exception {	//	The Person constructor throws an exception if the group
 											//	used to create the object is not valid. The Visitor constructor also
 											//	throws exception.
+		
+											//	Add permissions to the People.
 		systemUsers = new ArrayList<User>();
 		systemVisitors = new ArrayList<Visitor>();
 		systemCameras = new ArrayList<Camera>();
 		systemElevators = new ArrayList<Elevator>();
 		alarmSystem = new AlarmSystem();
 		registeredEntrances = new ArrayList<Person>();
+		condominiumSchedulePatterns = new ArrayList<SchedulePattern>();
 		
 		systemUsers.add(new User(0, "Maria", "Maria", "123", 20, 2, 2, Groups.Administrator));
 		systemUsers.add(new User(1, "Joao", "Joao", "123", 10 , 1, 1, Groups.User));
@@ -81,6 +86,9 @@ public class Database {	//	Class implemented using the Singleton design pattern.
 	public AlarmSystem getCondominiumAlarmSystem() {
 		return alarmSystem;
 	}
+	public ArrayList<SchedulePattern> getCondominiumSchedulePatterns() {
+		return condominiumSchedulePatterns;
+	}
 	public void save(User user) {
 		systemUsers.add(user);
 	}
@@ -89,5 +97,8 @@ public class Database {	//	Class implemented using the Singleton design pattern.
 	}
 	public void save(Person person) {
 		registeredEntrances.add(person);
+	}
+	public void save(SchedulePattern schedulePattern) {
+		condominiumSchedulePatterns.add(schedulePattern);
 	}
 }

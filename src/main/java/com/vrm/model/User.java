@@ -10,6 +10,7 @@ public class User extends Person{
 	private int building;
 	private int apartmentNumber;
 	private ArrayList<Notification> notifications;
+	private ArrayList<ElevatorHistory> history;
 	
 	public User(int id, String name, String login, String password, int apartmentNumber, int floor, int building, Enum<Groups> group) throws Exception {
 			super(id, name, null, group, creatingUser);		//	Using null for the photo attribute.
@@ -19,6 +20,7 @@ public class User extends Person{
 			this.building = building;
 			this.notifications = new ArrayList<Notification>();
 			this.apartmentNumber = apartmentNumber;
+			this.history = new ArrayList<ElevatorHistory>();
 	}
 	
 	public String getLogin() {
@@ -38,6 +40,29 @@ public class User extends Person{
 	}
 	public int getApartmentNumber() {
 		return this.apartmentNumber;
+	}
+	public ArrayList<ElevatorHistory> getHistory() {
+		return history;
+	}
+	public void addCallToHistory(int originFloor, int destinationFloor, int hour) {
+		this.history.add(new ElevatorHistory(originFloor, destinationFloor, hour));
+	}
+	public void removeCallHistory(int originFloor, int destinationFloor, int hour) {	//method used to remove from history when 
+																			//it becomes a SchedulePattern.
+		ElevatorHistory elevHistory = new ElevatorHistory(originFloor, destinationFloor, hour);
+		for(int i=0; i<this.history.size();i++) {
+			if(this.history.get(i).equals(elevHistory))
+				this.history.remove(i);
+		}
+	}
+	public int numHistoryOccurrences(int originFloor, int destinationFloor, int hour) {
+		int occurrences = 0;
+		ElevatorHistory elevHistory = new ElevatorHistory(originFloor, destinationFloor, hour);
+		for(int i=0; i<this.history.size();i++) {
+			if(this.history.get(i).equals(elevHistory))
+				occurrences++;
+		}
+		return occurrences;	
 	}
 	public void addNotification(String description, Object photo) {
 		this.notifications.add(new Notification(description, photo));

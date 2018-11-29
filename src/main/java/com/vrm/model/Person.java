@@ -6,7 +6,7 @@ import com.vrm.systemexceptions.InvalidPersonGroupException;
 
 public class Person {
 	
-	private int id;
+	private Integer id;
 	private String name;
 	private Object photo;
 	private Enum<Groups> group;
@@ -15,7 +15,11 @@ public class Person {
 	
 	static final boolean creatingUser = true; 
 	
-	Person(int id, String name, Object photo, Enum<Groups> group, boolean creatingUser) throws Exception {
+	public Person() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Person(Integer id, String name, Object photo, Enum<Groups> group, boolean creatingUser) throws Exception {
 		final boolean groupIsConsistent = (creatingUser && (group==Groups.User || group==Groups.Administrator)) || (!creatingUser && (group==Groups.Visitor || group==Groups.Maintenance));
 		if(groupIsConsistent) {
 			this.id=id;
@@ -27,7 +31,7 @@ public class Person {
 		else
 			throw new InvalidPersonGroupException();
 		}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	public String getName() {
@@ -65,8 +69,12 @@ public class Person {
 	}
 	
 	public boolean equals(Person p) {
-		if(p.getId()==this.id && p.getName() == this.name && p.getGroup() == this.group)
-			return true;
+		if(p.getId() != null && p.getName() != null && p.getGroup() != null) {
+			if(p.getId()==this.id && p.getName() == this.name && p.getGroup() == this.group)
+				return true;
+			else
+				return false;
+		}
 		else
 			return false;
 	}

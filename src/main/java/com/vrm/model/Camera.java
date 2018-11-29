@@ -7,6 +7,10 @@ public class Camera {
 	private int id;
 	private RecognitionModule recognitionModule;
 	
+	public Camera() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Camera(int id) {
 		this.id=id;
 		this.recognitionModule = new RecognitionModule();
