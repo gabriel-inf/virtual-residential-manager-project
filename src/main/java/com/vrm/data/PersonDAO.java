@@ -54,11 +54,11 @@ public class PersonDAO {
 		Database.getInstance().save(savingVisitor);
 	}
 	
-	public boolean authenticateUser(String login, String password) throws Exception {
+	public User authenticateUser(String login, String password) throws Exception {
 		for(User user : Database.getInstance().getAllUsers()) {
 			if (user.getLogin() == login && user.getPassword() == password)
-				return true;
+				return user;
 		}
-		return false;
+		throw new RegisterNotFoundException();
 	}
 }
