@@ -1,9 +1,14 @@
+package com.vrm.data;
+
 import java.util.ArrayList;
 
 import org.apache.catalina.User;
 import org.springframework.boot.jdbc.DatabaseDriver;
 
+import com.vrm.model.Groups;
 import com.vrm.model.Person;
+import com.vrm.model.Visitor;
+import com.vrm.model.User;
 import com.vrm.systemexceptions.RegisterNotFoundException;
 
 
@@ -49,8 +54,8 @@ public class PersonDAO {
 		Database.getInstance().save(savingVisitor);
 	}
 	
-	public boolean authenticateUser(String login, String password) {
-		for(User user : Database.getInstance.getAllUsers()) {
+	public boolean authenticateUser(String login, String password) throws Exception {
+		for(User user : Database.getInstance().getAllUsers()) {
 			if (user.getLogin() == login && user.getPassword() == password)
 				return true;
 		}

@@ -2,6 +2,11 @@ package com.vrm.service;
 
 import java.util.ArrayList;
 
+import com.vrm.data.CondominiumDAO;
+import com.vrm.data.PersonDAO;
+import com.vrm.data.CameraDAO;
+import com.vrm.model.Camera;
+import com.vrm.model.Person;
 import com.vrm.systemexceptions.PersonNotIdentifiedException;
 
 
@@ -19,10 +24,24 @@ public class CameraService {
 		}
 		throw new PersonNotIdentifiedException();
 	}
-
-	public int peopleWaitingBeforeOpening(Camera camera){
-		return camera.getNumPeopleWaiting();
-	}	
+	
+	public boolean isThereIntruders(ArrayList<Person> authorizedPeople, ArrayList<Person> peopleWhoEntered, Camera camera) throws Exception {
+		CondominiumDAO condominiumDAO = new CondominiumDAO();
+		boolean validEntrance = camera.validateEntrance(authorizedPeople, peopleWhoEntered);
+		
+		if(validEntrance) {
+			for (Person person : peopleWhoEntered) {
+				condominiumDAO.registerPersonEntrance(person);
+			}
+		}
+		
+		return validEntrance;
+		
+	}
+	
+	public Object capturePhoto(Camera camera) {
+		return camera.captureImage();
+	}
 //	public static void main(String[] args) throws Exception {
 //		PersonDAO personDAO = new PersonDAO();
 //		Person p = new Person(0, "Maria", null, Groups.Administrator, true);

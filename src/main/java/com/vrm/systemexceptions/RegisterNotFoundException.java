@@ -1,4 +1,4 @@
-package systemexceptions;
+package com.vrm.systemexceptions;
 
 public class RegisterNotFoundException extends Exception{
 

@@ -17,4 +17,45 @@ public class Configuration {
 		this.group=group;
 	}
 
+	public int getStartingHour() {
+		return startingHour;
+	}
+
+	public void setStartingHour(int startingHour) {
+		this.startingHour = startingHour;
+	}
+
+	public int getEndingHour() {
+		return endingHour;
+	}
+
+	public void setEndingHour(int endingHour) {
+		this.endingHour = endingHour;
+	}
+
+	public ArrayList<Integer> getDaysOfTheWeek() {
+		return daysOfTheWeek;
+	}
+
+	public void setDaysOfTheWeek(ArrayList<Integer> daysOfTheWeek) {
+		this.daysOfTheWeek = daysOfTheWeek;
+	}
+
+	public Enum<Groups> getGroup() {
+		return group;
+	}
+
+	public void setGroup(Enum<Groups> group) {
+		this.group = group;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	
 }

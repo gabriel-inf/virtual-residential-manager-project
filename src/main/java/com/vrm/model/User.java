@@ -42,6 +42,9 @@ public class User extends Person{
 	public void addNotification(String description, Object photo) {
 		this.notifications.add(new Notification(description, photo));
 	}
+	public void replyNotification() {
+		this.notifications.remove(0);	//It always removes the first notification that was sent.
+	}
 	@Override
 	public String toString() {
 		return "[Id:" + this.getId() + ", Name: "+this.getName()+", Photo: "+this.getPhoto()+", Group: "+this.getGroup()+

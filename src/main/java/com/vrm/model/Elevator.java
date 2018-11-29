@@ -7,12 +7,14 @@ public class Elevator {
 	private Integer destinationFloor;
 	private ArrayList<Integer> demandedFloors;
 	private int buildingNumber;
+	private Camera elevatorCamera;
 	
-	public Elevator(int buildingNumber) {
+	public Elevator(int buildingNumber, Camera elevatorCamera) {
 		this.actualFloor=0;
 		this.destinationFloor=null;
 		this.demandedFloors=new ArrayList<Integer>();
 		this.buildingNumber=buildingNumber;
+		this.elevatorCamera = elevatorCamera;
 	}
 	
 	public Integer getActualFloor() {
@@ -42,5 +44,13 @@ public class Elevator {
 			if(!demandedFloors.isEmpty())
 				this.destinationFloor=this.demandedFloors.remove(0);
 		}
+	}
+
+	public Camera getElevatorCamera() {
+		return elevatorCamera;
+	}
+
+	public void setElevatorCamera(Camera elevatorCamera) {
+		this.elevatorCamera = elevatorCamera;
 	}
 }

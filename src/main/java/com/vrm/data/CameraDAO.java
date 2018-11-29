@@ -1,8 +1,10 @@
+package com.vrm.data;
+
 import java.util.ArrayList;
 
 import com.vrm.model.Camera;
 
-import systemexceptions.RegisterNotFoundException;
+import com.vrm.systemexceptions.RegisterNotFoundException;
 
 public class CameraDAO {
 	public Camera getCameraById(int cameraId) throws Exception {
