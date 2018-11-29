@@ -1,17 +1,20 @@
 package com.vrm.controller;
 
-import java.util.ArrayList;
 
+import com.vrm.data.Database;
 import com.vrm.model.Person;
 import com.vrm.service.CameraService;
 
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.qos.logback.core.util.SystemInfo;
-
+@CrossOrigin
 @RestController
+@RequestMapping("/camera")
 public class CameraController{
 
     private CameraService camService = new CameraService();
@@ -25,7 +28,9 @@ public class CameraController{
      */
 
     @PutMapping
-    public boolean identifyCameraAction(Person p, Integer camId) throws Exception {
+    public boolean identifyCameraAction(@RequestBody Person p, @RequestParam Integer camId) throws Exception {
+        Database.getInstance().cleanLog();
+        Database.getInstance().log("Camera " + camId + "identifies a person");
         try {
             this.camService.identifyPerson(p, camId);
             return true; 

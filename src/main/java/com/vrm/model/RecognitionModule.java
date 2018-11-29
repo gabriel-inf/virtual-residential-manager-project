@@ -2,11 +2,14 @@ package com.vrm.model;
 
 import java.util.ArrayList;
 
+import com.vrm.data.Database;
 import com.vrm.systemexceptions.IdentificationParametersException;
 
 public class RecognitionModule {
 
 	public boolean identify(Person person, ArrayList<Person> systemPeople) throws IdentificationParametersException {
+		
+		
 		if(person!=null && !systemPeople.isEmpty()) {
 			for (Person systemPerson : systemPeople) {
 				if(person.equals(systemPerson))

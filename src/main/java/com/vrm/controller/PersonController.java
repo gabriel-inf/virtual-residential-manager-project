@@ -1,11 +1,9 @@
 package com.vrm.controller;
 
 import com.vrm.model.Groups;
-import com.vrm.model.Person;
 import com.vrm.model.User;
 import com.vrm.service.PersonService;
 
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
