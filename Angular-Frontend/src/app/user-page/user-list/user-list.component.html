@@ -1,0 +1,107 @@
+<div>
+  <div *ngIf="showingList" class="card" style="margin-top: 7%;margin-left: 15.7%;width: 70%;">
+    <div class="card-body">
+      <div style="overflow-y: auto;max-height: 255px;">
+        <table class="table table table-borderless table-hover font-weight-light">
+          <thead>
+            <th style="width: 55%;">Name</th>
+            <th>Floor</th>
+            <th style="width: 21%;">Apartment</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>oi</td>
+              <td>oi</td>
+              <td>oi</td>
+            </tr>
+            <tr>
+              <td>oi</td>
+              <td>oi</td>
+              <td>oi</td>
+            </tr>
+            <tr>
+              <td>oi</td>
+              <td>oi</td>
+              <td>oi</td>
+            </tr>
+            <tr>
+              <td>oi</td>
+              <td>oi</td>
+              <td>oi</td>
+            </tr>
+            <tr>
+              <td>oi</td>
+              <td>oi</td>
+              <td>oi</td>
+            </tr>
+            <tr>
+              <td>oi</td>
+              <td>oi</td>
+              <td>oi</td>
+            </tr>
+            <tr>
+              <td>oi</td>
+              <td>oi</td>
+              <td>oi</td>
+            </tr>
+            <tr>
+              <td>oi</td>
+              <td>oi</td>
+              <td>oi</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-left: 28%;">
+        <button class="btn btn-dark font-weight-light" (click)="showingList=false;creatingUser=true">Create New User</button>
+        <button class="btn btn-dark font-weight-light" style="margin-left:.3%" (click)="showingList=false;updatingUser=true">Edit
+          User</button>
+        <button class="btn btn-dark font-weight-light" style="margin-left:.3%" (click)="showingList=false;deletingUser=true">Delete
+          User</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="creatingUser" style="margin-top: 7%;margin-left: 31.3%;width: 36%;" class="card">
+    <div class="card-body">
+      <form #form>
+        <div>
+          <label class="font-weight-light">Name:</label>
+          <input #name name="name" type="text" class="form-control">
+        </div>
+        <div style="padding-top: 3%;">
+          <label class="font-weight-light">Floor:</label>
+          <input #floor name="floor" type="text" class="form-control">
+        </div>
+        <div style="padding-top: 3%;">
+            <label class="font-weight-light">Apartment:</label>
+            <input #apartment name="apartment" type="text" class="form-control">
+        </div>
+      </form>
+      <button type="button" class="btn btn-light" style="margin-top: 5%;margin-left: 40%;" (click)='createUser(name,floor,apartment);'>Submit</button>
+    </div>
+  </div>
+  <div *ngIf="updatingUser" style="margin-top: 7%;margin-left: 31.3%;width: 36%;" class="card">
+    <div class="card-body">
+        <form #upform>
+          <div>
+            <label class="font-weight-light">Name:</label>
+            <input #upname name="upname" type="text" class="form-control">
+          </div>
+          <div style="padding-top: 3%;">
+            <label class="font-weight-light">Floor:</label>
+            <input #upfloor name="upfloor" type="text" class="form-control">
+          </div>
+          <div style="padding-top: 3%;">
+            <label class="font-weight-light">Apartment:</label>
+            <input #upapartment name="upapartment" type="text" class="form-control">
+          </div>
+        </form>
+        <button type="button" class="btn btn-light" style="margin-top: 5%;margin-left: 40%;" (click)='updateUser(upname,upfloor,upapartment);'>Submit</button>
+    </div>
+  </div>
+  <div *ngIf="deletingUser" style="margin-top: 7%;margin-left: 31.3%;width: 36%;" class="card">
+    <div class="card-body">
+      deleting user
+    </div>
+  </div>
+</div>

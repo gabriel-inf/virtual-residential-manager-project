@@ -1,0 +1,13 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+.btn-dark{
+    color: #fff;
+    background-color: #7b2957f7;
+    border-color: #7b2957f7;
+}
+.btn-dark:hover{
+    color: #7b2957f7;
+    background-color: mistyrose;
+    border-color: mistyrose;
+    transition-delay: 65ms;
+}
