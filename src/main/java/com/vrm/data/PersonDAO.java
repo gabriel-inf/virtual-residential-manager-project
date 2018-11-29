@@ -2,13 +2,12 @@ package com.vrm.data;
 
 import java.util.ArrayList;
 
-import org.apache.catalina.User;
+import com.vrm.model.User;
 import org.springframework.boot.jdbc.DatabaseDriver;
 
 import com.vrm.model.Groups;
 import com.vrm.model.Person;
 import com.vrm.model.Visitor;
-import com.vrm.model.User;
 import com.vrm.systemexceptions.RegisterNotFoundException;
 
 
@@ -23,6 +22,7 @@ public class PersonDAO {
 	
 	public User getUserById(int id) throws Exception {
 		ArrayList<User> systemUsers = new ArrayList<User>(); 
+
 		systemUsers.addAll(Database.getInstance().getAllUsers());
 			
 		for (User user : systemUsers) {
