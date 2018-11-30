@@ -13,6 +13,7 @@ public class GateService {
 	
 	public void openGateService(ArrayList<Person> authorizedPeople, ArrayList<Person> peopleThatEntered) throws Exception {
 		CameraService cameraService = new CameraService();
+		ElevatorService elevatorService = new ElevatorService();
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
 		Gate gate = condominiumDAO.getCondominiumGate();
 		
@@ -25,6 +26,12 @@ public class GateService {
 			condominiumDAO.getCondominiumAlarmSystem().activateAlarms();
 		}else{
 			Database.getInstance().log("#There are no intruders");
+
+			for (Person person : peopleThatEntered) {
+				elevatorService.callElevator(person, 100, true);
+			}
+			
+
 		}
 
 		gate.close();

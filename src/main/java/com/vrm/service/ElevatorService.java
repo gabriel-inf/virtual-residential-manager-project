@@ -11,6 +11,7 @@ import com.vrm.model.User;
 public class ElevatorService {
 	
 	public boolean callElevator(Person person, int destinationFloor, boolean identified) throws Exception {
+
 		//	Method to call the elevator in the first feature. Elevator is always called to first floor and then 
 		//	the destination floor.
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
