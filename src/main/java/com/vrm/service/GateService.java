@@ -18,7 +18,8 @@ public class GateService {
 		Gate gate = condominiumDAO.getCondominiumGate();
 		
 		Database.getInstance().log("#Gate service");
-
+		
+		Database.getInstance().log("#Opening gate");
 		gate.open();
 		boolean isThereIntruders = cameraService.isThereIntruders(authorizedPeople, peopleThatEntered, gate.getGateCamera());
 		if(isThereIntruders) {
@@ -33,7 +34,8 @@ public class GateService {
 			
 
 		}
-
+		
+		Database.getInstance().log("#Closing gate");
 		gate.close();
 	}
 	

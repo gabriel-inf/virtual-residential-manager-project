@@ -33,8 +33,11 @@ public class GateController {
                 this.authorizedPeople.addAll(Database.getInstance().getAllUsers());
                 this.enteringPeople.add(Database.getInstance().getAllUsers().get(0));
 
-
-                Database.getInstance().log("Entering " + this.enteringPeople.size() + " people");
+                if(this.enteringPeople.size()>1)
+                	Database.getInstance().log("Entering " + this.enteringPeople.size() + " people");
+                else
+                	Database.getInstance().log("Entering " + this.enteringPeople.size() + " person");
+                
                 this.gateService.openGateService(this.authorizedPeople, this.enteringPeople);
                 return Database.getInstance().getLogs();
             
@@ -42,9 +45,6 @@ public class GateController {
                 return "";
 
         }
-
-
-
 
     }
 
