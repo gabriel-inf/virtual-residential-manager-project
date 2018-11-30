@@ -33,7 +33,7 @@ public class CameraService {
 		boolean validEntrance = camera.validateEntrance(authorizedPeople, peopleWhoEntered);
 		
 
-		Database.getInstance().log("#Check for intruders");
+		Database.getInstance().log("#Starting to check for intruders");
 
 		if(validEntrance) {
 			for (Person person : peopleWhoEntered) {
