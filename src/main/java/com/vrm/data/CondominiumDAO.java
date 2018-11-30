@@ -16,6 +16,7 @@ public class CondominiumDAO {
 		return Database.getInstance().getRegisteredEntrances();
 	}
 	public void registerPersonEntrance(Person person) throws Exception {
+		Database.getInstance().log(person.getName() + " has entered");
 		Database.getInstance().save(person);
 	}
 	public ArrayList<Elevator> getCondominiumElevators() throws Exception{

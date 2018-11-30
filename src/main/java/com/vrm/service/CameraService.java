@@ -32,13 +32,16 @@ public class CameraService {
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
 		boolean validEntrance = camera.validateEntrance(authorizedPeople, peopleWhoEntered);
 		
+
+		Database.getInstance().log("#Check for intruders");
+
 		if(validEntrance) {
 			for (Person person : peopleWhoEntered) {
 				condominiumDAO.registerPersonEntrance(person);
 			}
 		}
 		
-		return validEntrance;
+		return !validEntrance;
 		
 	}
 	

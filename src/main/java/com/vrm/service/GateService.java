@@ -3,6 +3,7 @@ package com.vrm.service;
 import java.util.ArrayList;
 
 import com.vrm.data.CondominiumDAO;
+import com.vrm.data.Database;
 import com.vrm.data.PersonDAO;
 import com.vrm.model.Gate;
 import com.vrm.model.Person;
@@ -15,10 +16,15 @@ public class GateService {
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
 		Gate gate = condominiumDAO.getCondominiumGate();
 		
+		Database.getInstance().log("#Gate service");
+
 		gate.open();
 		boolean isThereIntruders = cameraService.isThereIntruders(authorizedPeople, peopleThatEntered, gate.getGateCamera());
 		if(isThereIntruders) {
+			Database.getInstance().log("#There are intruders!");
 			condominiumDAO.getCondominiumAlarmSystem().activateAlarms();
+		}else{
+			Database.getInstance().log("#There are no intruders");
 		}
 
 		gate.close();

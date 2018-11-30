@@ -1,5 +1,7 @@
 package com.vrm.model;
 
+import com.vrm.data.Database;
+
 public class AlarmSystem {
 	private boolean active;
 	
@@ -11,10 +13,12 @@ public class AlarmSystem {
 		return active;
 	}
 	
-	public void activateAlarms() {
+	public void activateAlarms() throws Exception {
+		Database.getInstance().log("#Alarm activated!");
 		this.active = true;
 	}
-	public void deactivateAlarms() {
+	public void deactivateAlarms() throws Exception {
+		Database.getInstance().log("#Alarm deactivated!");
 		this.active = false;
 	}
 }

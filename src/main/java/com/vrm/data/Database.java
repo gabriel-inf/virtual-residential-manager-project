@@ -109,7 +109,7 @@ public class Database { // Class implemented using the Singleton design pattern.
 	}
 
 	public void log(String action){
-		systemFlowString="#"+action+systemFlowString;
+		systemFlowString=systemFlowString+"#"+action;
 	} 
 	public void cleanLog(){
 		systemFlowString = "Started case:#";
