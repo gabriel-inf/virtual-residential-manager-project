@@ -23,7 +23,7 @@ public class CameraService {
 		if(camera != null) {
 			systemPeople.addAll(personDAO.getAllPeople());
 			if(camera.getRecognitionModule().identify(person, systemPeople))
-				return person;
+				return personDAO.getPersonById(person.getId());
 		}
 		throw new PersonNotIdentifiedException();
 	}

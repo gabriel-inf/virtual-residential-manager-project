@@ -31,7 +31,17 @@ public class PersonDAO {
 		}
 		throw new RegisterNotFoundException();
 	}
-	
+	public Person getPersonById(int id) throws Exception {
+		ArrayList<Person> systemPeople = new ArrayList<Person>();
+		systemPeople.addAll(Database.getInstance().getAllUsers());
+		systemPeople.addAll(Database.getInstance().getAllVisitors());
+			
+		for (Person person: systemPeople) {
+			if(person.getId() == id)
+				return person;
+		}
+		throw new RegisterNotFoundException();
+	}
 	public User getUserByApartmentNumber(int apartmentNumber) throws Exception {
 		ArrayList<User> systemUsers = new ArrayList<User>(); 
 		systemUsers.addAll(Database.getInstance().getAllUsers());

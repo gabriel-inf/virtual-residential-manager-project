@@ -5,10 +5,10 @@ import com.vrm.systemexceptions.UnableToVinculateException;
 public class SchedulePattern {
 	private int originFloor;
 	private int destinationFloor;
-	private String hour;
+	private int hour;
 	private User patternHolder;
 	
-	public SchedulePattern(int originFloor, int destinationFloor, String hour, User patternHolder) throws UnableToVinculateException {
+	public SchedulePattern(int originFloor, int destinationFloor, int hour, User patternHolder) throws UnableToVinculateException {
 		if(patternHolder != null) {
 			this.originFloor=originFloor;
 			this.destinationFloor=destinationFloor;
@@ -24,12 +24,17 @@ public class SchedulePattern {
 	public int getDestinationFloor() {
 		return destinationFloor;
 	}
-	public String getHour() {
+	public int getHour() {
 		return hour;
 	}
 	public User getPatternHolder() {
 		return patternHolder;
 	}
-	
-	
+	public boolean equals(SchedulePattern schedulePattern) {
+		if(this.destinationFloor == schedulePattern.getDestinationFloor() && this.originFloor == schedulePattern.getOriginFloor()
+				&& this.hour == schedulePattern.getHour() && this.patternHolder == schedulePattern.getPatternHolder())
+			return true;
+		else
+			return false;
+	}
 }

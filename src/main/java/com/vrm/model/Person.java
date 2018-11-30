@@ -6,7 +6,7 @@ import com.vrm.systemexceptions.InvalidPersonGroupException;
 
 public class Person {
 	
-	private int id;
+	private Integer id;
 	private String name;
 	private Object photo;
 	private Groups group;
@@ -15,7 +15,11 @@ public class Person {
 	
 	static final boolean creatingUser = true; 
 	
-	Person(int id, String name, Object photo, Groups group, boolean creatingUser) throws Exception {
+	public Person() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Person(Integer id, String name, Object photo, Groups group, boolean creatingUser) throws Exception {
 		final boolean groupIsConsistent = (creatingUser && (group==Groups.User || group==Groups.Administrator)) || (!creatingUser && (group==Groups.Visitor || group==Groups.Maintenance));
 		if(groupIsConsistent) {
 			this.id=id;
@@ -27,7 +31,7 @@ public class Person {
 		else
 			throw new InvalidPersonGroupException();
 		}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	public String getName() {
@@ -41,6 +45,9 @@ public class Person {
 	}
 	public ArrayList<Integer> getPermissions() {
 		return this.permissions;
+	}
+	public void addPermission(Integer permission) {
+		this.permissions.add(permission);
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -65,9 +72,15 @@ public class Person {
 	}
 	
 	public boolean equals(Person p) {
-		if(p.getId()==this.id && p.getName() == this.name && p.getGroup() == this.group)
+		if(p.getId()==this.id && p.getName().equals(this.name) && p.getGroup().equals(this.group))
 			return true;
 		else
 			return false;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [id=" + id + ", name=" + name + ", photo=" + photo + ", group=" + group + ", permissions="
+				+ permissions + "]";
 	}
 }

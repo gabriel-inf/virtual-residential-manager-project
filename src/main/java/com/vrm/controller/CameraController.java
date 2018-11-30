@@ -1,12 +1,14 @@
 package com.vrm.controller;
 
-import com.vrm.data.Database;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import com.vrm.model.Person;
 import com.vrm.service.CameraService;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import com.vrm.data.Database;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

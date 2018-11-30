@@ -8,6 +8,7 @@ import com.vrm.model.Elevator;
 import com.vrm.model.Gate;
 import com.vrm.model.Groups;
 import com.vrm.model.Person;
+import com.vrm.model.SchedulePattern;
 import com.vrm.model.User;
 import com.vrm.model.Visitor;
 
@@ -18,20 +19,25 @@ public class Database { // Class implemented using the Singleton design pattern.
 	private static ArrayList<Person> registeredEntrances;
 	private static ArrayList<Camera> systemCameras;
 	private static ArrayList<Elevator> systemElevators;
+	private static ArrayList<SchedulePattern> condominiumSchedulePatterns;
 	private static AlarmSystem alarmSystem;
 	private static Gate condominiumGate;
 	private static String systemFlowString; 
 
 
-	private Database() throws Exception { // The Person constructor throws an exception if the group
+	private Database() throws Exception { 	// The Person constructor throws an exception if the group
 											// used to create the object is not valid. The Visitor constructor also
 											// throws exception.
+											//	Add permissions to the People.
 		systemUsers = new ArrayList<User>();
 		systemVisitors = new ArrayList<Visitor>();
 		systemCameras = new ArrayList<Camera>();
 		systemElevators = new ArrayList<Elevator>();
 		alarmSystem = new AlarmSystem();
 		registeredEntrances = new ArrayList<Person>();
+
+		condominiumSchedulePatterns = new ArrayList<SchedulePattern>();
+		
 		systemFlowString = "Started case:#";
 
 		systemUsers.add(new User(0, "Maria", "Maria", "123", 20, 2, 2, Groups.Administrator));
@@ -55,7 +61,8 @@ public class Database { // Class implemented using the Singleton design pattern.
 		systemElevators.add(new Elevator(1, systemCameras.get(1)));
 
 		condominiumGate = new Gate(systemCameras.get(2));
-
+		systemUsers.get(0).addPermission(1);
+		systemUsers.get(0).addPermission(2);
 	}
 
 	public static Database getInstance() throws Exception {
@@ -92,6 +99,10 @@ public class Database { // Class implemented using the Singleton design pattern.
 		return alarmSystem;
 	}
 
+	public ArrayList<SchedulePattern> getCondominiumSchedulePatterns() {
+		return condominiumSchedulePatterns;
+	}
+
 	public void save(User user) {
 		systemUsers.add(user);
 	}
@@ -104,6 +115,9 @@ public class Database { // Class implemented using the Singleton design pattern.
 		registeredEntrances.add(person);
 	}
 
+	public void save(SchedulePattern schedulePattern) {
+		condominiumSchedulePatterns.add(schedulePattern);
+	}
 	public String getLogs(){
 		return systemFlowString;
 	}

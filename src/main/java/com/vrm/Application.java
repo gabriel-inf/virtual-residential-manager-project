@@ -1,6 +1,8 @@
 package com.vrm;
 
 
+import com.vrm.model.Camera;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
