@@ -46,6 +46,9 @@ public class Person {
 	public ArrayList<Integer> getPermissions() {
 		return this.permissions;
 	}
+	public void addPermission(Integer permission) {
+		this.permissions.add(permission);
+	}
 	public void setName(String name) {
 		this.name = name;
 	}

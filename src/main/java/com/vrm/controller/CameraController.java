@@ -30,15 +30,15 @@ public class CameraController {
      */
 
     @PutMapping
-    public boolean identifyCameraAction(@RequestBody Person p, @RequestParam Integer camId) throws Exception {
+    public String identifyCameraAction(@RequestBody Person p, @RequestParam Integer camId) throws Exception {
         Database.getInstance().cleanLog();
         Database.getInstance().log("-> Camera " + camId + " identifies a person " + p.getName());
 
         try {
             this.camService.identifyPerson(p, camId);
-            return true;
+            return Database.getInstance().getLogs();
         } catch (Exception e) {
-            return false;
+            return Database.getInstance().getLogs();
         }
 
     }
