@@ -11,10 +11,13 @@ import com.vrm.model.User;
 public class ElevatorService {
 	
 	public boolean callElevator(Person person, int destinationFloor, boolean identified) throws Exception {
+		//	Method to call the elevator in the first feature. Elevator is always called to first floor and then 
+		//	the destination floor.
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
 		if(identified) {
 			boolean isAllowed = person.checkPermissions(destinationFloor);
 			if(isAllowed) {
+				this.getClosestElevator(condominiumDAO.getCondominiumElevators(), 0).call(0);
 				this.getClosestElevator(condominiumDAO.getCondominiumElevators(), 0).call(destinationFloor);  //  Call the elevator that is closest to the first floor.
 				return true;
 			}
@@ -35,7 +38,8 @@ public class ElevatorService {
 			
 			boolean isAllowed = user.checkPermissions(destinationFloor);
 			if(isAllowed) {
-				this.getClosestElevator(condominiumDAO.getCondominiumElevators(), originFloor).call(destinationFloor);  //  Call the elevator that is closest to the first floor.
+				this.getClosestElevator(condominiumDAO.getCondominiumElevators(), originFloor).call(originFloor);
+				this.getClosestElevator(condominiumDAO.getCondominiumElevators(), originFloor).call(destinationFloor);
 				if(condominiumDAO.getSchedulePattern(user, originFloor, destinationFloor, hour) == null) {
 					int occurrences = user.numHistoryOccurrences(originFloor, destinationFloor, hour);
 					if(occurrences < 7) {
@@ -55,12 +59,20 @@ public class ElevatorService {
 			return false;
 	}
 	
-/*	public boolean patternCallElevator(int hour) throws Exception {
+	public boolean patternCallElevator(int hour) throws Exception {
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
-		ArrayList<SchedulePattern> schedulePatterns = new ArrayList<SchedulePattern>();
-		schedulePatterns.addAll(condominiumDAO.getSchedulePatternsByHour(hour));
-		
-	}*/
+		ArrayList<Elevator> condominiumElevators = new ArrayList<Elevator>(condominiumDAO.getCondominiumElevators());
+		ArrayList<SchedulePattern> schedulePatterns = new ArrayList<SchedulePattern>(condominiumDAO.getSchedulePatternsByHour(hour));
+		if(!schedulePatterns.isEmpty()) {
+			for (SchedulePattern schedulePattern : schedulePatterns) {
+				Elevator closestElevator = this.getClosestElevator(condominiumElevators, schedulePattern.getOriginFloor());
+				closestElevator.call(schedulePattern.getOriginFloor());
+				closestElevator.call(schedulePattern.getDestinationFloor());
+			}
+			return true;
+		}
+		return false;
+	}
 	
 	private Elevator getClosestElevator(ArrayList<Elevator> condominiumElevators, int floor) {
 		if(condominiumElevators != null && floor >= 0) {

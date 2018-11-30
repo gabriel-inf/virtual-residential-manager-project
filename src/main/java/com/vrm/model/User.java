@@ -48,7 +48,7 @@ public class User extends Person{
 		this.history.add(new ElevatorHistory(originFloor, destinationFloor, hour));
 	}
 	public void removeCallHistory(int originFloor, int destinationFloor, int hour) {	//method used to remove from history when 
-																			//it becomes a SchedulePattern.
+																						//it becomes a SchedulePattern.
 		ElevatorHistory elevHistory = new ElevatorHistory(originFloor, destinationFloor, hour);
 		for(int i=0; i<this.history.size();i++) {
 			if(this.history.get(i).equals(elevHistory))
