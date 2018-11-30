@@ -69,13 +69,15 @@ public class Person {
 	}
 	
 	public boolean equals(Person p) {
-		if(p.getId() != null && p.getName() != null && p.getGroup() != null) {
-			if(p.getId()==this.id && p.getName() == this.name && p.getGroup() == this.group)
-				return true;
-			else
-				return false;
-		}
+		if(p.getId()==this.id && p.getName().equals(this.name) && p.getGroup().equals(this.group))
+			return true;
 		else
 			return false;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [id=" + id + ", name=" + name + ", photo=" + photo + ", group=" + group + ", permissions="
+				+ permissions + "]";
 	}
 }

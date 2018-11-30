@@ -8,9 +8,7 @@ import com.vrm.systemexceptions.IdentificationParametersException;
 public class RecognitionModule {
 
 	public boolean identify(Person person, ArrayList<Person> systemPeople) throws IdentificationParametersException {
-		
-		
-		if(person!=null && !systemPeople.isEmpty()) {
+		if(!systemPeople.isEmpty()) {
 			for (Person systemPerson : systemPeople) {
 				if(person.equals(systemPerson))
 					return true;
