@@ -43,6 +43,7 @@ public class PersonDAO {
 		throw new RegisterNotFoundException();
 	}
 	public User getUserByApartmentNumber(int apartmentNumber) throws Exception {
+		Database.getInstance().log("Getting user by appartment");
 		ArrayList<User> systemUsers = new ArrayList<User>(); 
 		systemUsers.addAll(Database.getInstance().getAllUsers());
 		

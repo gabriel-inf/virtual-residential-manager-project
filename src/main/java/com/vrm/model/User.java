@@ -2,6 +2,8 @@ package com.vrm.model;
 
 import java.util.ArrayList;
 
+import com.vrm.data.Database;
+
 
 public class User extends Person{
 	private String login;
@@ -64,10 +66,12 @@ public class User extends Person{
 		}
 		return occurrences;	
 	}
-	public void addNotification(String description, Object photo) {
+	public void addNotification(String description, Object photo) throws Exception {
+		Database.getInstance().log("User apparment owner received a notification with photo and description");
 		this.notifications.add(new Notification(description, photo));
 	}
-	public void replyNotification() {
+	public void replyNotification() throws Exception {
+		Database.getInstance().log("Notification has been removed");
 		this.notifications.remove(0);	//It always removes the first notification that was sent.
 	}
 	@Override
