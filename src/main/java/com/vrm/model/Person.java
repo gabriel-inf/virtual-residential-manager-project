@@ -65,7 +65,7 @@ public class Person {
 		return this.group == Groups.User || this.group == Groups.Administrator;
 	}
 	public boolean checkPermissions(int destinationFloor) {
-		for (Integer allowedFloor : permissions) {
+		for (Integer allowedFloor : this.permissions) {
 			if(allowedFloor == destinationFloor) 
 				return true;
 		}

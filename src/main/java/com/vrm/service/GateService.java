@@ -10,59 +10,73 @@ import com.vrm.model.Person;
 import com.vrm.model.User;
 
 public class GateService {
-	
-	public void openGateService(ArrayList<Person> authorizedPeople, ArrayList<Person> peopleThatEntered) throws Exception {
+
+	public void openGateService(ArrayList<Person> authorizedPeople, ArrayList<Person> peopleThatEntered)
+			throws Exception {
+
 		CameraService cameraService = new CameraService();
 		ElevatorService elevatorService = new ElevatorService();
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
 		Gate gate = condominiumDAO.getCondominiumGate();
-		
-		Database.getInstance().log("#Gate service");
-		
-		Database.getInstance().log("#Opening gate");
+
+		Database.getInstance().log("Gate service");
+		Database.getInstance().log("Opening gate");
+
 		gate.open();
-		boolean isThereIntruders = cameraService.isThereIntruders(authorizedPeople, peopleThatEntered, gate.getGateCamera());
-		if(isThereIntruders) {
-			Database.getInstance().log("#There are intruders!");
+		boolean isThereIntruders = cameraService.isThereIntruders(authorizedPeople, peopleThatEntered,
+				gate.getGateCamera());
+		if (isThereIntruders) {
+			Database.getInstance().log("There are intruders!");
 			condominiumDAO.getCondominiumAlarmSystem().activateAlarms();
-		}else{
-			Database.getInstance().log("#There are no intruders");
-
+		} else {
+			Database.getInstance().log("There are no intruders");
 			for (Person person : peopleThatEntered) {
-				elevatorService.callElevator(person, 100, true);
+				Database.getInstance().log(person.getName() + "\'s entrance has been registered!");
+				elevatorService.callElevator(person, person.getPermissions().get(0), true);
 			}
-			
-
 		}
-		
-		Database.getInstance().log("#Closing gate");
+		Database.getInstance().log("Closing gate");
 		gate.close();
 	}
-	
+
 	public void sendNotification(int apartmentNumber) throws Exception {
+
 		PersonDAO personDAO = new PersonDAO();
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
 		Gate gate = condominiumDAO.getCondominiumGate();
 		User userToNotify;
-		
+
 		userToNotify = personDAO.getUserByApartmentNumber(apartmentNumber);
-		if(userToNotify != null) {
-			userToNotify.addNotification("Person waiting to enter", new CameraService().capturePhoto(gate.getGateCamera()));
+		if (userToNotify != null) {
+			Database.getInstance().log("Will notify " + userToNotify.getName());
+			userToNotify.addNotification("Person waiting to enter",
+					new CameraService().capturePhoto(gate.getGateCamera()));
 		}
 	}
-	
-	public void answerNotification(boolean status, Person personEntering, ArrayList<Person> peopleThatEntered, int apartmentNumber) throws Exception {
+
+	public void answerNotification(boolean status, Person personEntering, ArrayList<Person> peopleThatEntered,
+			int apartmentNumber) throws Exception {
+
+		ElevatorService elevatorService = new ElevatorService();
+
 		PersonDAO personDAO = new PersonDAO();
 		User userNotificated;
-		
+
+		Database.getInstance().log("User from appartment " + apartmentNumber + " answers notification");
+
 		userNotificated = personDAO.getUserByApartmentNumber(apartmentNumber);
-		userNotificated.replyNotification();
-		
-		if(status) {
+
+		if (status) {
+			Database.getInstance().log("User approved entry");
 			ArrayList<Person> authorizedPeople = new ArrayList<>();
+			personEntering.addPermission(userNotificated.getFloor());
 			authorizedPeople.add(personEntering);
 			this.openGateService(authorizedPeople, peopleThatEntered);
+			//elevatorService.callElevator(personEntering, userNotificated.getFloor(), true);
+
+		} else {
+			Database.getInstance().log("User denied the entry");
 		}
+		userNotificated.replyNotification();
 	}
-	
 }

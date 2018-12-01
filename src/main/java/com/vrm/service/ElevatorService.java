@@ -2,6 +2,7 @@ package com.vrm.service;
 import java.util.ArrayList;
 
 import com.vrm.data.CondominiumDAO;
+import com.vrm.data.Database;
 import com.vrm.data.PersonDAO;
 import com.vrm.model.Elevator;
 import com.vrm.model.Person;
@@ -14,11 +15,16 @@ public class ElevatorService {
 
 		//	Method to call the elevator in the first feature. Elevator is always called to first floor and then 
 		//	the destination floor.
+
+
+
+
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
 		if(identified) {
 			boolean isAllowed = person.checkPermissions(destinationFloor);
 			if(isAllowed) {
 				this.getClosestElevator(condominiumDAO.getCondominiumElevators(), 0).call(0);
+
 				this.getClosestElevator(condominiumDAO.getCondominiumElevators(), 0).call(destinationFloor);  //  Call the elevator that is closest to the first floor.
 				return true;
 			}
@@ -91,4 +97,16 @@ public class ElevatorService {
 			return null;
 	}
 	
+	private ArrayList<Integer> returnFloorOptions(Person person) throws Exception {
+		ArrayList<Integer> allowedFloors = new ArrayList<Integer>();
+		CondominiumDAO condominiumDAO = new CondominiumDAO();
+		
+		for (int i = 0; i < condominiumDAO.getBuildNumOfFloors(); i++) {
+			if (person.checkPermissions(i)) {
+				allowedFloors.add(i);
+			}
+		}
+
+		return allowedFloors;
+	} 
 }

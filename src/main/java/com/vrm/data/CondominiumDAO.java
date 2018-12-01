@@ -2,6 +2,7 @@ package com.vrm.data;
 
 import java.util.ArrayList;
 
+import com.vrm.model.Condominium;
 import com.vrm.model.AlarmSystem;
 import com.vrm.model.Elevator;
 import com.vrm.model.Gate;
@@ -11,6 +12,9 @@ import com.vrm.model.User;
 
 public class CondominiumDAO {
 	
+	public  Integer getBuildNumOfFloors() throws Exception {
+		return Database.getInstance().getCondominiumInfo().getBuildNumOfFloors();
+	}
 	public AlarmSystem getCondominiumAlarmSystem() throws Exception{
 		return Database.getInstance().getCondominiumAlarmSystem();
 	}

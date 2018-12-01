@@ -11,6 +11,7 @@ import com.vrm.model.Person;
 import com.vrm.model.SchedulePattern;
 import com.vrm.model.User;
 import com.vrm.model.Visitor;
+import com.vrm.model.Condominium;
 
 public class Database { // Class implemented using the Singleton design pattern.
 	private static Database instance = null;
@@ -19,10 +20,11 @@ public class Database { // Class implemented using the Singleton design pattern.
 	private static ArrayList<Person> registeredEntrances;
 	private static ArrayList<Camera> systemCameras;
 	private static ArrayList<Elevator> systemElevators;
+	private static Condominium condominiumInfo;
 	private static ArrayList<SchedulePattern> condominiumSchedulePatterns;
 	private static AlarmSystem alarmSystem;
 	private static Gate condominiumGate;
-	private static String systemFlowString; 
+	private static String systemFlowString;
 
 
 	private Database() throws Exception { 	// The Person constructor throws an exception if the group
@@ -35,6 +37,8 @@ public class Database { // Class implemented using the Singleton design pattern.
 		systemElevators = new ArrayList<Elevator>();
 		alarmSystem = new AlarmSystem();
 		registeredEntrances = new ArrayList<Person>();
+
+		condominiumInfo = new Condominium(10);
 
 		condominiumSchedulePatterns = new ArrayList<SchedulePattern>();
 		
@@ -69,6 +73,10 @@ public class Database { // Class implemented using the Singleton design pattern.
 		if (instance == null)
 			instance = new Database();
 		return instance;
+	}
+
+	public Condominium getCondominiumInfo() {
+		return condominiumInfo;
 	}
 
 	public Gate getCondominiumGate() {
@@ -126,6 +134,6 @@ public class Database { // Class implemented using the Singleton design pattern.
 		systemFlowString=systemFlowString+"#"+action;
 	} 
 	public void cleanLog(){
-		systemFlowString = "Started case:#";
+		systemFlowString = "";
 	}
 }

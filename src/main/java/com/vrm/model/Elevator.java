@@ -2,6 +2,8 @@ package com.vrm.model;
 
 import java.util.ArrayList;
 
+import com.vrm.data.Database;
+
 public class Elevator {
 	private Integer actualFloor;
 	private Integer destinationFloor;
@@ -30,7 +32,12 @@ public class Elevator {
 		return buildingNumber;
 	}
 	
-	public void call(int destinationFloor) {
+	public void call(int destinationFloor) throws Exception {
+
+
+		Database.getInstance().log("Elevator from building " + this.getBuildingNumber() +  
+			" was called from " + this.getActualFloor() + " to " + destinationFloor);
+			
 		if(this.destinationFloor==null)
 			this.destinationFloor=destinationFloor;
 		else

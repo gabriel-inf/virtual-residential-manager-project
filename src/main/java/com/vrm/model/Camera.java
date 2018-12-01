@@ -2,6 +2,10 @@ package com.vrm.model;
 
 import java.util.ArrayList;
 
+import javax.xml.crypto.Data;
+
+import com.vrm.data.Database;
+
 public class Camera {
 
 	private int id;
@@ -24,7 +28,8 @@ public class Camera {
 		return recognitionModule;
 	}
 
-	public boolean validateEntrance(ArrayList<Person> authorizedPeople, ArrayList<Person> peopleWhoEntered) {
+	public boolean validateEntrance(ArrayList<Person> authorizedPeople, ArrayList<Person> peopleWhoEntered)
+			throws Exception {
 		if (peopleWhoEntered.size() <= authorizedPeople.size()) {
 
 			for (Person entered : peopleWhoEntered) {
@@ -34,6 +39,7 @@ public class Camera {
 			}
 			return true;
 		}
+		Database.getInstance().log("wrong size!");
 		return false;
 	}
 

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-smart-gate',
@@ -18,7 +17,7 @@ export class SmartGateComponent implements OnInit {
     { id: 5, desc: "Pizza man to Gilberto (appartment 516)" }
   ]
 
-  constructor(private api: ApiService) { console.log(this.cases) }
+  constructor() { console.log(this.cases) }
 
   ngOnInit() {
   }
