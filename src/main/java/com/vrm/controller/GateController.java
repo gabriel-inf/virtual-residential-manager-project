@@ -28,13 +28,13 @@ public class GateController {
     @PutMapping
     public String openGate(@RequestParam Integer c) throws Exception {
 
+        Visitor visitor;
+
         authorizedPeople = new ArrayList<>();
         enteringPeople = new ArrayList<>();
 
         Database.getInstance().cleanLog();
         this.authorizedPeople.addAll(Database.getInstance().getAllUsers());
-
-        
 
         switch (c) {
         case 1:
@@ -47,7 +47,7 @@ public class GateController {
 
         case 2:
 
-            Visitor visitor = Database.getInstance().getAllVisitors().get(0);
+            visitor = Database.getInstance().getAllVisitors().get(0);
             User user = Database.getInstance().getAllUsers().get(1);
 
             gateService.sendNotification(10);
@@ -57,7 +57,14 @@ public class GateController {
             gateService.answerNotification(true, visitor, this.enteringPeople, 10);
 
             return Database.getInstance().getLogs();
+        case 3:
+            Database.getInstance().log("Case 3: Unauthorized user enters!");
+            visitor = Database.getInstance().getAllVisitors().get(1);
+            this.enteringPeople.add(visitor);
 
+            gateService.openGateService(authorizedPeople, enteringPeople);
+            return Database.getInstance().getLogs();
+           
         default:
             return "";
 

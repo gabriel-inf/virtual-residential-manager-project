@@ -14,11 +14,11 @@ public class AlarmSystem {
 	}
 	
 	public void activateAlarms() throws Exception {
-		Database.getInstance().log("#Alarm activated!");
+		Database.getInstance().log("Alarm activated!");
 		this.active = true;
 	}
 	public void deactivateAlarms() throws Exception {
-		Database.getInstance().log("#Alarm deactivated!");
+		Database.getInstance().log("Alarm deactivated!");
 		this.active = false;
 	}
 }

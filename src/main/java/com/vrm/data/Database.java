@@ -134,6 +134,6 @@ public class Database { // Class implemented using the Singleton design pattern.
 		systemFlowString=systemFlowString+"#"+action;
 	} 
 	public void cleanLog(){
-		systemFlowString = "Started case:#";
+		systemFlowString = "";
 	}
 }
