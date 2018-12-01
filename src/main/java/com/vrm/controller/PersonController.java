@@ -1,6 +1,6 @@
 package com.vrm.controller;
 
-import com.vrm.model.Groups;
+import com.vrm.enums.Groups;
 import com.vrm.model.User;
 import com.vrm.service.PersonService;
 

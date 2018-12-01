@@ -2,6 +2,8 @@ package com.vrm.model;
 
 import java.util.ArrayList;
 
+import com.vrm.enums.Groups;
+
 public class Configuration {
 	private int startingHour;
 	private int endingHour;

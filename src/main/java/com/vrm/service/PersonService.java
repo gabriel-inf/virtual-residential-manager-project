@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import com.vrm.model.Person;
 import com.vrm.model.User;
 import com.vrm.data.PersonDAO;
+import com.vrm.enums.Groups;
 import com.vrm.systemexceptions.InvalidPersonGroupException;
-import com.vrm.model.Groups;
 
 public class PersonService {
 	private PersonDAO personDAO = new PersonDAO();
