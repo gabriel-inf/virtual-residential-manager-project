@@ -2,11 +2,11 @@ package com.vrm.data;
 
 import java.util.ArrayList;
 
+import com.vrm.enums.Groups;
 import com.vrm.model.AlarmSystem;
 import com.vrm.model.Camera;
 import com.vrm.model.Elevator;
 import com.vrm.model.Gate;
-import com.vrm.model.Groups;
 import com.vrm.model.Person;
 import com.vrm.model.SchedulePattern;
 import com.vrm.model.User;

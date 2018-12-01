@@ -2,6 +2,7 @@ package com.vrm.model;
 
 import java.util.ArrayList;
 
+import com.vrm.enums.Groups;
 import com.vrm.systemexceptions.UnableToVinculateException;
 
 public class Visitor extends Person{

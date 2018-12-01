@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.vrm.model.User;
 import org.springframework.boot.jdbc.DatabaseDriver;
 
-import com.vrm.model.Groups;
+import com.vrm.enums.Groups;
 import com.vrm.model.Person;
 import com.vrm.model.Visitor;
 import com.vrm.systemexceptions.RegisterNotFoundException;

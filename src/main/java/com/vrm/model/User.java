@@ -2,6 +2,8 @@ package com.vrm.model;
 
 import java.util.ArrayList;
 
+import com.vrm.enums.Groups;
+
 
 public class User extends Person{
 	private String login;

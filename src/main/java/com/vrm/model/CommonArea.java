@@ -2,7 +2,7 @@ package com.vrm.model;
 
 import java.util.ArrayList;
 
-import com.vrm.CommonAreaTypes;
+import com.vrm.enums.CommonAreaTypes;
 
 public class CommonArea extends CondominumDependency{
 	private Enum<CommonAreaTypes> type;

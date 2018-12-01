@@ -1,4 +1,4 @@
-package com.vrm.model;
+package com.vrm.enums;
 
 
 public enum Groups {
