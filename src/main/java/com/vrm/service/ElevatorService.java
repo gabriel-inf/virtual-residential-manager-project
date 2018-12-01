@@ -91,4 +91,16 @@ public class ElevatorService {
 			return null;
 	}
 	
+	private ArrayList<Integer> returnFloorOptions(Person person) throws Exception {
+		ArrayList<Integer> allowedFloors = new ArrayList<Integer>();
+		CondominiumDAO condominiumDAO = new CondominiumDAO();
+		
+		for (int i = 0; i < condominiumDAO.getBuildNumOfFloors(); i++) {
+			if (person.checkPermissions(i)) {
+				allowedFloors.add(i);
+			}
+		}
+
+		return allowedFloors;
+	} 
 }
