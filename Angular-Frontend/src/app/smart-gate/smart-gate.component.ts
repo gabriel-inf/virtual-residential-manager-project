@@ -25,23 +25,23 @@ export class SmartGateComponent implements OnInit {
 
   selectsCase(c) {
     if (this.selectedCase != c) {
+      
       this.selectedCase = c;
-
-      console.log(c.id)
-      this.api.gateCaseSimulate(c.id).subscribe(res => {
-        this.response = res;
-        console.log(this.response)
-      });
-
-
     } else {
       this.selectedCase = null
       this.response = "";
     }
   }
 
-  simulate() {
-
+  simulate(c) {
+    console.log(c.id)
+    this.api.gateCaseSimulate(c.id).subscribe(res => {
+      this.response = res;
+      console.log(this.response)
+    });
   }
 
+  clear(){
+    this.response="";
+  }
 }
