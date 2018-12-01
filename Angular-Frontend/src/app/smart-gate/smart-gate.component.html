@@ -13,3 +13,5 @@
 <div class="alert alert-primary" role="alert" *ngIf="selectedCase" style="margin-top: 20px">Selected case: {{selectedCase.id}}</div>
 
 <button type="button" class="btn btn-outline-success btn-block" style="margin-top: 30px" (click)="simulate(selectedCase)">Simulate</button>
+
+<div *ngIf="response!==''"><app-logs  [iteractionLogs]="response" style="margin: 100px"></app-logs></div>

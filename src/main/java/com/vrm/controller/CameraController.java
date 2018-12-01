@@ -29,7 +29,7 @@ public class CameraController {
      * @throws Exception
      */
 
-    @PutMapping
+    @GetMapping
     public String identifyCameraAction(@RequestBody Person p, @RequestParam Integer camId) throws Exception {
         Database.getInstance().cleanLog();
         Database.getInstance().log("-> Camera " + camId + " identifies a person " + p.getName());

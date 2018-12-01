@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-smart-gate',
@@ -11,13 +12,13 @@ export class SmartGateComponent implements OnInit {
 
   cases = [
     { id: 1, desc: "Proprietary known user" },
-    { id: 2, desc: "Proprietary user and 1 known friend" },
-    { id: 3, desc: "Proprietary and 1 unknown friend" },
-    { id: 4, desc: "Unknown user ask to go to appartment 1005" },
-    { id: 5, desc: "Pizza man to Gilberto (appartment 516)" }
+    { id: 2, desc: "Proprietary knows an user that wants to enter" },
+    { id: 3, desc: "Unauthorized user tried to enter" },
   ]
 
-  constructor() { console.log(this.cases) }
+
+  response = "";
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
   }
@@ -25,13 +26,22 @@ export class SmartGateComponent implements OnInit {
   selectsCase(c) {
     if (this.selectedCase != c) {
       this.selectedCase = c;
+
+      console.log(c.id)
+      this.api.gateCaseSimulate(c.id).subscribe(res => {
+        this.response = res;
+        console.log(this.response)
+      });
+
+
     } else {
       this.selectedCase = null
+      this.response = "";
     }
   }
 
-  simulate(){
-    
+  simulate() {
+
   }
 
 }

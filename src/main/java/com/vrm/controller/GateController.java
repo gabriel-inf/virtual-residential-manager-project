@@ -9,6 +9,7 @@ import com.vrm.model.Visitor;
 import com.vrm.service.GateService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ public class GateController {
     private ArrayList<Person> authorizedPeople;
     private ArrayList<Person> enteringPeople;
 
-    @PutMapping
+    @GetMapping
     public String openGate(@RequestParam Integer c) throws Exception {
 
         Visitor visitor;

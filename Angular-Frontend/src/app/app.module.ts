@@ -13,6 +13,8 @@ import { CameraListComponent } from './camera-list/camera-list.component';
 import { ElevatorListComponent } from './elevator-list/elevator-list.component';
 import { GateListComponent } from './gate-list/gate-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LogsComponent } from './logs/logs.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,11 +28,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CameraListComponent,
     ElevatorListComponent,
     GateListComponent,
-    DashboardComponent
+    DashboardComponent,
+    LogsComponent
   ],
   imports: [
     BrowserModule,
-    RoutingModule
+    RoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
