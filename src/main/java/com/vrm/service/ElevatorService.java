@@ -77,6 +77,7 @@ public class ElevatorService {
 	}
 
 	public boolean patternCallElevator(int hour) throws Exception {
+		Database.getInstance().log("Pattern called");
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
 		ArrayList<Elevator> condominiumElevators = new ArrayList<Elevator>(condominiumDAO.getCondominiumElevators());
 		ArrayList<SchedulePattern> schedulePatterns = new ArrayList<SchedulePattern>(

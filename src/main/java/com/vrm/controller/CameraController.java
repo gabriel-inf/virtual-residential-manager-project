@@ -1,6 +1,5 @@
 package com.vrm.controller;
 
-
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.vrm.model.Camera;
@@ -51,24 +50,14 @@ public class CameraController {
 
     }
 
-
     @GetMapping("/callElevator")
     public String userGettingCloseToElevator() throws Exception {
-        
-        
+
         Database.getInstance().cleanLog();
         ElevatorService elevatorService = new ElevatorService();
-        Integer areaFloor = 3;
-
-        
-        Database.getInstance().log("Case 1");
-      
-
-        Camera cameraThatIdentified = Database.getInstance().getAllCameras().get(0);
-        User user = Database.getInstance().getAllUsers().get(0);
-        elevatorService.userCallElevator(user, areaFloor, user.getFloor(), 10);
-
-
+        CameraService cameraService = new CameraService();
+       
+        elevatorService.patternCallElevator(10);
 
         return Database.getInstance().getLogs();
 

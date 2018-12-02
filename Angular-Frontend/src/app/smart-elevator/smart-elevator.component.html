@@ -1,3 +1,17 @@
-<p>
-  smart-elevator works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="row" *ngFor="let c of this.cases" style="margin-top: 10px">
+        <button type="button" class="btn btn-outline-secondary btn-block" (click)="selectsCase(c)"> {{c.id}}. {{c.desc}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="alert alert-primary" role="alert" *ngIf="selectedCase" style="margin-top: 20px">Selected case: {{selectedCase.id}}</div>
+
+<button type="button" class="btn btn-outline-success btn-block" style="margin-top: 30px" (click)="simulate(selectedCase)">Simulate</button>
+<button type="button" class="btn btn-outline-danger btn-block" style="margin-top: 30px" (click)="clear()">Clear</button>
+<div *ngIf="response!==''"><app-logs  [iteractionLogs]="response" style="margin: 100px"></app-logs></div>
