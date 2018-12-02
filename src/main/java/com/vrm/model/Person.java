@@ -2,6 +2,7 @@ package com.vrm.model;
 
 import java.util.ArrayList;
 
+import com.vrm.data.Database;
 import com.vrm.enums.Groups;
 import com.vrm.systemexceptions.InvalidPersonGroupException;
 
@@ -64,7 +65,8 @@ public class Person {
 	public boolean isUser() {
 		return this.group == Groups.User || this.group == Groups.Administrator;
 	}
-	public boolean checkPermissions(int destinationFloor) {
+	public boolean checkPermissions(int destinationFloor) throws Exception {
+		Database.getInstance().log("Permission checked");
 		for (Integer allowedFloor : this.permissions) {
 			if(allowedFloor == destinationFloor) 
 				return true;

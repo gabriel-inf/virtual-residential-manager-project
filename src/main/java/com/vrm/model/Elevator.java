@@ -54,7 +54,8 @@ public class Elevator {
 		}
 	}
 
-	public Camera getElevatorCamera() {
+	public Camera getElevatorCamera() throws Exception {
+		Database.getInstance().log("Elevator camera in action");
 		return elevatorCamera;
 	}
 

@@ -83,6 +83,7 @@ public class ElevatorService {
 		ArrayList<SchedulePattern> schedulePatterns = new ArrayList<SchedulePattern>(
 				condominiumDAO.getSchedulePatternsByHour(hour));
 		if (!schedulePatterns.isEmpty()) {
+			Database.getInstance().log("There are patterns for " + hour + " time");
 			for (SchedulePattern schedulePattern : schedulePatterns) {
 				Elevator closestElevator = this.getClosestElevator(condominiumElevators,
 						schedulePattern.getOriginFloor());

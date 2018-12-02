@@ -39,19 +39,22 @@ public class GateController {
 
         switch (c) {
         case 1:
-
+            Database.getInstance().log("Case 1: user enters");
             this.enteringPeople.add(Database.getInstance().getAllUsers().get(0));
-            Database.getInstance().log("Entering " + this.enteringPeople.size() + " people");
+            Database.getInstance().log("Entering " + this.enteringPeople.size());
             this.gateService.openGateService(this.authorizedPeople, this.enteringPeople);
 
             return Database.getInstance().getLogs();
 
         case 2:
 
+            Database.getInstance().log("Case 2: Visitor tries to enter");
             visitor = Database.getInstance().getAllVisitors().get(0);
             User user = Database.getInstance().getAllUsers().get(1);
 
-            gateService.sendNotification(10);
+            Database.getInstance().log("Visitor name: " + visitor.getName());
+            Database.getInstance().log("Appartment that he wants to visit " + user.getApartmentNumber());
+            gateService.sendNotification(user.getApartmentNumber());
 
             this.enteringPeople.add(visitor);
 

@@ -53,7 +53,8 @@ public class Camera {
 		return true;
 	}
 
-	public Object captureImage() {
+	public Object captureImage() throws Exception {
+		Database.getInstance().log("Camera captured image!");
 		return "Image Captured";
 	}
 }

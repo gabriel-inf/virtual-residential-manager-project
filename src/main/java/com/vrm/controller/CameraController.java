@@ -53,12 +53,22 @@ public class CameraController {
     @GetMapping("/callElevator")
     public String userGettingCloseToElevator() throws Exception {
 
-        Database.getInstance().cleanLog();
+        
         ElevatorService elevatorService = new ElevatorService();
         CameraService cameraService = new CameraService();
-       
-        elevatorService.patternCallElevator(10);
 
+        
+        User user = Database.getInstance().getAllUsers().get(1);
+        
+        for (Integer i = 0; i < 10; i++){
+            elevatorService.userCallElevator(user, user.getFloor(), 0, 10);
+        }
+        
+        Database.getInstance().cleanLog();
+        Database.getInstance().log( user.getName() + " getts close to elevator at 10am");
+
+        elevatorService.patternCallElevator(10);
+ 
         return Database.getInstance().getLogs();
 
     }

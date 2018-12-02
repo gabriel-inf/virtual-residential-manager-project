@@ -46,7 +46,7 @@ public class CameraService {
 		
 	}
 	
-	public Object capturePhoto(Camera camera) {
+	public Object capturePhoto(Camera camera) throws Exception {
 		return camera.captureImage();
 	}
 //	public static void main(String[] args) throws Exception {
