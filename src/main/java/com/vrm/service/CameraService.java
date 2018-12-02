@@ -19,7 +19,7 @@ public class CameraService {
 		CameraDAO cameraDAO = new CameraDAO();
 		ArrayList<Person> systemPeople = new ArrayList<Person>();
 		Camera camera = cameraDAO.getCameraById(cameraId);
-	
+		
 		if(camera != null) {
 			systemPeople.addAll(personDAO.getAllPeople());
 			if(camera.getRecognitionModule().identify(person, systemPeople))

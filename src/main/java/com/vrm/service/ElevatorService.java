@@ -1,4 +1,5 @@
 package com.vrm.service;
+
 import java.util.ArrayList;
 
 import com.vrm.data.CondominiumDAO;
@@ -10,69 +11,80 @@ import com.vrm.model.SchedulePattern;
 import com.vrm.model.User;
 
 public class ElevatorService {
-	
+
 	public boolean callElevator(Person person, int destinationFloor, boolean identified) throws Exception {
 
-		//	Method to call the elevator in the first feature. Elevator is always called to first floor and then 
-		//	the destination floor.
-
-
-
+		// Method to call the elevator in the first feature. Elevator is always called
+		// to first floor and then
+		// the destination floor.
 
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
-		if(identified) {
+		if (identified) {
 			boolean isAllowed = person.checkPermissions(destinationFloor);
-			if(isAllowed) {
+			if (isAllowed) {
 				this.getClosestElevator(condominiumDAO.getCondominiumElevators(), 0).call(0);
 
-				this.getClosestElevator(condominiumDAO.getCondominiumElevators(), 0).call(destinationFloor);  //  Call the elevator that is closest to the first floor.
+				this.getClosestElevator(condominiumDAO.getCondominiumElevators(), 0).call(destinationFloor); // Call the
+																												// elevator
+																												// that
+																												// is
+																												// closest
+																												// to
+																												// the
+																												// first
+																												// floor.
 				return true;
-			}
-			else
+			} else
 				return false;
-		}
-		else {
+		} else {
 			this.getClosestElevator(condominiumDAO.getCondominiumElevators(), 0).call(destinationFloor);
 			return true;
 		}
 	}
-	
+
 	public boolean userCallElevator(Person person, int originFloor, int destinationFloor, int hour) throws Exception {
-		if(person.isUser() && person.getId() != null) {
+		Database.getInstance()
+				.log(person.getName() + " calls elevator from " + originFloor + " to " + destinationFloor + " floor.");
+		if (person.isUser() && person.getId() != null) {
 			CondominiumDAO condominiumDAO = new CondominiumDAO();
 			PersonDAO personDAO = new PersonDAO();
 			User user = personDAO.getUserById(person.getId());
-			
+
 			boolean isAllowed = user.checkPermissions(destinationFloor);
-			if(isAllowed) {
+			if (isAllowed) {
+				Database.getInstance().log("user is allowed");
 				this.getClosestElevator(condominiumDAO.getCondominiumElevators(), originFloor).call(originFloor);
 				this.getClosestElevator(condominiumDAO.getCondominiumElevators(), originFloor).call(destinationFloor);
-				if(condominiumDAO.getSchedulePattern(user, originFloor, destinationFloor, hour) == null) {
+
+				if (condominiumDAO.getSchedulePattern(user, originFloor, destinationFloor, hour) == null) {
 					int occurrences = user.numHistoryOccurrences(originFloor, destinationFloor, hour);
-					if(occurrences < 7) {
+					if (occurrences < 7) {
 						user.addCallToHistory(originFloor, destinationFloor, hour);
-					}
-					else{
+					} else {
 						user.removeCallHistory(originFloor, destinationFloor, hour);
-						condominiumDAO.saveSchedulePattern(new SchedulePattern(originFloor, destinationFloor, hour, user));					
+						condominiumDAO
+								.saveSchedulePattern(new SchedulePattern(originFloor, destinationFloor, hour, user));
 					}
 				}
 				return true;
-			}
-			else
+			} else {
+				Database.getInstance().log("user is not allowed");
 				return false;
-		}
-		else
+			}
+
+		} else
 			return false;
 	}
-	
+
 	public boolean patternCallElevator(int hour) throws Exception {
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
 		ArrayList<Elevator> condominiumElevators = new ArrayList<Elevator>(condominiumDAO.getCondominiumElevators());
-		ArrayList<SchedulePattern> schedulePatterns = new ArrayList<SchedulePattern>(condominiumDAO.getSchedulePatternsByHour(hour));
-		if(!schedulePatterns.isEmpty()) {
+		ArrayList<SchedulePattern> schedulePatterns = new ArrayList<SchedulePattern>(
+				condominiumDAO.getSchedulePatternsByHour(hour));
+		if (!schedulePatterns.isEmpty()) {
 			for (SchedulePattern schedulePattern : schedulePatterns) {
-				Elevator closestElevator = this.getClosestElevator(condominiumElevators, schedulePattern.getOriginFloor());
+				Elevator closestElevator = this.getClosestElevator(condominiumElevators,
+						schedulePattern.getOriginFloor());
 				closestElevator.call(schedulePattern.getOriginFloor());
 				closestElevator.call(schedulePattern.getDestinationFloor());
 			}
@@ -80,27 +92,26 @@ public class ElevatorService {
 		}
 		return false;
 	}
-	
+
 	private Elevator getClosestElevator(ArrayList<Elevator> condominiumElevators, int floor) {
-		if(condominiumElevators != null && floor >= 0) {
+		if (condominiumElevators != null && floor >= 0) {
 			Elevator closestElevator = condominiumElevators.get(0);
 			int distanceToDestination = closestElevator.getActualFloor() - floor;
 			for (Elevator elevator : condominiumElevators) {
-				if((elevator.getActualFloor() - floor) < distanceToDestination ) {
+				if ((elevator.getActualFloor() - floor) < distanceToDestination) {
 					closestElevator = elevator;
 					distanceToDestination = elevator.getActualFloor() - floor;
 				}
 			}
 			return closestElevator;
-		}
-		else
+		} else
 			return null;
 	}
-	
+
 	private ArrayList<Integer> returnFloorOptions(Person person) throws Exception {
 		ArrayList<Integer> allowedFloors = new ArrayList<Integer>();
 		CondominiumDAO condominiumDAO = new CondominiumDAO();
-		
+
 		for (int i = 0; i < condominiumDAO.getBuildNumOfFloors(); i++) {
 			if (person.checkPermissions(i)) {
 				allowedFloors.add(i);
@@ -108,5 +119,5 @@ public class ElevatorService {
 		}
 
 		return allowedFloors;
-	} 
+	}
 }

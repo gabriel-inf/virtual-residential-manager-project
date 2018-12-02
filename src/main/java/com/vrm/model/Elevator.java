@@ -45,8 +45,9 @@ public class Elevator {
 			
 	}
 	
-	public void move() {
+	public void move() throws Exception {
 		if(destinationFloor!=null) {
+			Database.getInstance().log("Elevator moved! (from "+ this.getActualFloor() +" to "+ this.getDestinationFloor() +")");
 			this.actualFloor=this.destinationFloor;
 			if(!demandedFloors.isEmpty())
 				this.destinationFloor=this.demandedFloors.remove(0);

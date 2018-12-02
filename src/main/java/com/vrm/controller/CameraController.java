@@ -2,11 +2,19 @@ package com.vrm.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.vrm.model.Camera;
 import com.vrm.model.Person;
+import com.vrm.model.User;
 import com.vrm.service.CameraService;
+import com.vrm.service.ElevatorService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.xml.crypto.Data;
+
 import com.vrm.data.Database;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +48,29 @@ public class CameraController {
         } catch (Exception e) {
             return Database.getInstance().getLogs();
         }
+
+    }
+
+
+    @GetMapping("/callElevator")
+    public String userGettingCloseToElevator() throws Exception {
+        
+        
+        Database.getInstance().cleanLog();
+        ElevatorService elevatorService = new ElevatorService();
+        Integer areaFloor = 3;
+
+        
+        Database.getInstance().log("Case 1");
+      
+
+        Camera cameraThatIdentified = Database.getInstance().getAllCameras().get(0);
+        User user = Database.getInstance().getAllUsers().get(0);
+        elevatorService.userCallElevator(user, areaFloor, user.getFloor(), 10);
+
+
+
+        return Database.getInstance().getLogs();
 
     }
 

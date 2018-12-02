@@ -65,8 +65,9 @@ public class Database { // Class implemented using the Singleton design pattern.
 		systemElevators.add(new Elevator(1, systemCameras.get(1)));
 
 		condominiumGate = new Gate(systemCameras.get(2));
-		systemUsers.get(0).addPermission(1);
+		systemUsers.get(0).addPermission(20);
 		systemUsers.get(0).addPermission(2);
+		systemUsers.get(1).addPermission(100);
 	}
 
 	public static Database getInstance() throws Exception {
