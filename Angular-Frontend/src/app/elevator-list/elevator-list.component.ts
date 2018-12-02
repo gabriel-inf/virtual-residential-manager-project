@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-elevator-list',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ElevatorListComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private api: ApiService) { }
+  response = [];
   ngOnInit() {
+  }
+
+  moveElevators(){
+    console.log("Mooooving")
+    this.api.moveAllElevators().subscribe(res => {
+      this.response = res.split("#");
+  
+    });
   }
 
 }
